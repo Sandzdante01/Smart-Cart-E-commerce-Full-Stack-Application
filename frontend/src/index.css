@@ -1,0 +1,78 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+:root {
+  --sc-primary: #3730a3;
+  --sc-primary-600: #4338ca;
+  --sc-secondary: #0ea5e9;
+  --sc-success: #16a34a;
+  --sc-warning: #d97706;
+  --sc-danger: #dc2626;
+  --sc-ink: #111827;
+  --sc-canvas: #f7f8fb;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--sc-canvas);
+  color: var(--sc-ink);
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.02em;
+}
+.sc-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.sc-scrollbar::-webkit-scrollbar-thumb {
+  background: #d5d9e2;
+  border-radius: 999px;
+}
+.sc-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sc-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+@keyframes sc-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.sc-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: #e9ecf2;
+}
+.sc-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: sc-shimmer 1.4s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
