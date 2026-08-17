@@ -48,12 +48,12 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: client/package-lock.json
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install frontend dependencies
-        working-directory: client
+        working-directory: frontend
         run: npm ci
 
       - name: Build frontend
-        working-directory: client
+        working-directory: frontend
         run: npm run build
