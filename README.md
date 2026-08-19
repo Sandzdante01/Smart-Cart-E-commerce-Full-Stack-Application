@@ -6,9 +6,9 @@ Smart Cart is a full-featured MERN (MongoDB, Express, React, Node.js) e-commerce
 
 ---
 
-## 🚀 Features
+## Features
 
-### 🛒 Customer Storefront
+### Customer Storefront
 *   **Home Page**: Dynamic landing page showcasing featured collections and banners.
 *   **Shop Page**: Product browsing with search, filter (by category, price, brand, rating), and sorting capability.
 *   **Product Details**: View product specs, dynamic stock status, reviews, and average rating.
@@ -16,7 +16,7 @@ Smart Cart is a full-featured MERN (MongoDB, Express, React, Node.js) e-commerce
 *   **Checkout Flow**: Multi-step checkout with address details and payment selection.
 *   **Real-time Notifications**: Custom notifications for order placement and status updates via Socket.IO.
 
-### 👤 User Account Panel
+### User Account Panel
 *   **Overview Dashboard**: View recent activities, order highlights, and account status.
 *   **Profile Manager**: Update personal details (name, email, phone).
 *   **Address Book**: Create and manage shipping/billing addresses.
@@ -24,7 +24,7 @@ Smart Cart is a full-featured MERN (MongoDB, Express, React, Node.js) e-commerce
 *   **Product Reviews**: Read, write, and manage submitted product reviews.
 *   **Settings**: Password changes and account preferences.
 
-### 🛠️ Administrative Dashboard
+### Administrative Dashboard
 *   **Analytics Hub**: Visual charts displaying revenues, orders, top categories, and sales trends using Recharts.
 *   **Product Catalog**: Full CRUD system to add, edit, or delete products (via a dedicated Product Form).
 *   **Category Control**: Create, update, or remove categories to keep the catalog organized.
@@ -35,7 +35,7 @@ Smart Cart is a full-featured MERN (MongoDB, Express, React, Node.js) e-commerce
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 
 ### Frontend
 *   **Framework**: [React](https://react.dev/) (v18)
@@ -56,7 +56,7 @@ Smart Cart is a full-featured MERN (MongoDB, Express, React, Node.js) e-commerce
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 ├── .github/workflows/
@@ -86,7 +86,7 @@ Smart Cart is a full-featured MERN (MongoDB, Express, React, Node.js) e-commerce
 
 ---
 
-## 🔧 Setup & Installation
+## Setup & Installation
 
 ### Prerequisites
 *   [Node.js](https://nodejs.org/) (Recommended: Node 24 as targeted by CI/CD)
@@ -114,7 +114,7 @@ JWT_SECRET=your_jwt_secret_here
 
 ---
 
-## 🏃 Running the Application
+## Running the Application
 
 ### Running Both Frontend & Backend Concurrently
 Start the development server for both projects simultaneously using:
@@ -131,7 +131,7 @@ If you wish to run the backend and frontend separately:
 
 ---
 
-## 🗃️ Database Seeding
+## Database Seeding
 
 The server features an **automatic database seeding mechanism** upon startup. If the MongoDB database is empty, it automatically triggers the seeding script to populate default categories, products, and admin accounts.
 
@@ -142,7 +142,7 @@ npm run seed
 
 ---
 
-## 🧪 Running Tests & Validation
+## Running Tests & Validation
 
 Run the test suite defined for the backend using:
 ```bash
@@ -155,9 +155,8 @@ npm test
 
 ---
 
-## 🔄 CI/CD Workflow
+## CI/CD Workflow
 
 The repository is integrated with **GitHub Actions** (`.github/workflows/ci.yml`). Every push or pull request to the `main` or `develop` branches triggers:
 1.  **Backend validation**: Sets up Node 24, installs dependencies via `npm ci`, and runs the Jest tests.
 2.  **Frontend validation**: Sets up Node 24, installs client dependencies, and runs `npm run build` to verify there are no compilation or typescript errors.
-
