@@ -160,3 +160,4 @@ npm test
 The repository is integrated with **GitHub Actions** (`.github/workflows/ci.yml`). Every push or pull request to the `main` or `develop` branches triggers:
 1.  **Backend validation**: Sets up Node 24, installs dependencies via `npm ci`, and runs the Jest tests.
 2.  **Frontend validation**: Sets up Node 24, installs client dependencies, and runs `npm run build` to verify there are no compilation or typescript errors.
+
