@@ -1,4 +1,3 @@
-import React from 'react';
 import { BuildingIcon, HeartHandshakeIcon, RocketIcon, UsersIcon } from 'lucide-react';
 import { PageHeader } from '../components/ui/PageHeader';
 import { SectionHeading } from '../components/ui/SectionHeading';

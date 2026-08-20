@@ -32,9 +32,9 @@ export const socketService = {
   },
 
   on<E extends SocketEventName>(event: E, handler: Handler<E>) {
-    socket.on(event, handler);
+    socket.on(event, handler as any);
     return () => {
-      socket.off(event, handler);
+      socket.off(event, handler as any);
     };
   },
 

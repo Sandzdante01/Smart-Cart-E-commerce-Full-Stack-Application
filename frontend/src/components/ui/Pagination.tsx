@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { classNames } from '../../utils/format';
 

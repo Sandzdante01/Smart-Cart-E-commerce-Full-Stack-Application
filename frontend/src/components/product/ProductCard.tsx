@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react';
 import { Badge, badgeTone } from '../ui/Badge';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MessageSquareIcon, Trash2Icon } from 'lucide-react';
 import { DataTable, type Column } from '../../components/ui/DataTable';
 import { Badge, statusTone } from '../../components/ui/Badge';

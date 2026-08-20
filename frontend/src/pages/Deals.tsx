@@ -1,4 +1,3 @@
-import React from 'react';
 import { PageHeader } from '../components/ui/PageHeader';
 import { ProductGrid } from '../components/product/ProductGrid';
 import { FlashSale } from '../components/home/FlashSale';

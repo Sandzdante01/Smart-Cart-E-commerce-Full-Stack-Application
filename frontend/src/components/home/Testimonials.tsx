@@ -1,4 +1,3 @@
-import React from 'react';
 import { QuoteIcon } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Rating } from '../ui/Rating';

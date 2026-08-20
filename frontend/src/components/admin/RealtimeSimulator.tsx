@@ -1,4 +1,3 @@
-import React from 'react';
 import { RadioIcon } from 'lucide-react';
 import { socketService } from '../../services/socket';
 import { useStore } from '../../contexts/StoreContext';

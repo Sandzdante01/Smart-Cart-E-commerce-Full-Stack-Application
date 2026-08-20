@@ -1,4 +1,3 @@
-import React from 'react';
 import { StarIcon } from 'lucide-react';
 import { classNames } from '../../utils/format';
 

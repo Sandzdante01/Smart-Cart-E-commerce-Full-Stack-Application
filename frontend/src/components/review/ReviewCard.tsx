@@ -1,4 +1,3 @@
-import React from 'react';
 import { BadgeCheckIcon } from 'lucide-react';
 import { Rating } from '../ui/Rating';
 import type { Review } from '../../types';

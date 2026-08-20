@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { MapPinIcon, PlusIcon } from 'lucide-react';
 import { Badge } from '../../components/ui/Badge';

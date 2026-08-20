@@ -1,4 +1,3 @@
-import React from 'react';
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { BanknoteIcon, PercentIcon, RepeatIcon, ShoppingBagIcon } from 'lucide-react';
 import { StatCard } from '../../components/ui/StatCard';

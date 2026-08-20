@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PackageIcon } from 'lucide-react';
 import { DataTable, type Column } from '../../components/ui/DataTable';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchIcon, UsersIcon } from 'lucide-react';
 import { DataTable, type Column } from '../../components/ui/DataTable';
 import { Badge, statusTone } from '../../components/ui/Badge';

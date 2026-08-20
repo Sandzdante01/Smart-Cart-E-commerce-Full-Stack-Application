@@ -1,4 +1,3 @@
-import React from 'react';
 import { MessageSquareIcon } from 'lucide-react';
 import { ReviewCard } from '../../components/review/ReviewCard';
 import { EmptyState } from '../../components/ui/EmptyState';

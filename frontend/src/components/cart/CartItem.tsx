@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { HeartIcon, MinusIcon, PlusIcon, Trash2Icon } from 'lucide-react';
 import { useStore } from '../../contexts/StoreContext';

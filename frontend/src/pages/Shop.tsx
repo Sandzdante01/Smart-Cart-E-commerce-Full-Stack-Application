@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SearchIcon, SlidersHorizontalIcon, XIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';

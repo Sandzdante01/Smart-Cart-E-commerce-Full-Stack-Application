@@ -1,4 +1,3 @@
-import React from 'react';
 import { HeadphonesIcon, ShieldCheckIcon, TruckIcon, VerifiedIcon } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
 

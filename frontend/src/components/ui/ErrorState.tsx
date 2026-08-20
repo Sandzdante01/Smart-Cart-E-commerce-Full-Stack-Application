@@ -1,4 +1,3 @@
-import React from 'react';
 import { AlertTriangleIcon, RotateCcwIcon } from 'lucide-react';
 import { Button } from './Button';
 

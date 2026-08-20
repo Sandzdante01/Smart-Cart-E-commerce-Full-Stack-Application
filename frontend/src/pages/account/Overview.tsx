@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon, HeartIcon, MessageSquareIcon, PackageIcon, PiggyBankIcon } from 'lucide-react';
 import { StatCard } from '../../components/ui/StatCard';

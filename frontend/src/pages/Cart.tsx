@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon, ShoppingCartIcon, TagIcon, TruckIcon } from 'lucide-react';
 import { PageHeader } from '../components/ui/PageHeader';

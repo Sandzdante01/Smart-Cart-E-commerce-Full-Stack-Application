@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { LockIcon } from 'lucide-react';
 import { useStore } from '../../contexts/StoreContext';

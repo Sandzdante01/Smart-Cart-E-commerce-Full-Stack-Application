@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeftIcon, PackageSearchIcon } from 'lucide-react';
 import { OrderTimeline } from '../../components/order/OrderTimeline';

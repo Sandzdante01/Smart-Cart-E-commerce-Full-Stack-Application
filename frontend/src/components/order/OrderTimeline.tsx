@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckIcon } from 'lucide-react';
 import { classNames } from '../../utils/format';
 import type { OrderStatus } from '../../types';

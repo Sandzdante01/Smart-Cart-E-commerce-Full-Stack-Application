@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { BellIcon, CheckCheckIcon, PackageIcon, TruckIcon, UserPlusIcon, AlertTriangleIcon } from 'lucide-react';
 import { useStore } from '../../contexts/StoreContext';

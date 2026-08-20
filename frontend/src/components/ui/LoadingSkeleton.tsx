@@ -1,4 +1,3 @@
-import React from 'react';
 import { classNames } from '../../utils/format';
 
 export function Skeleton({ className }: {className?: string;}) {

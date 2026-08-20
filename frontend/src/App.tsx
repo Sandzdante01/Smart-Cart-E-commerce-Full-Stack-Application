@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { StoreProvider } from './contexts/StoreContext';

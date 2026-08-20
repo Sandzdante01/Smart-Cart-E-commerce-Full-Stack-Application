@@ -10,8 +10,6 @@ import { toast } from 'sonner';
 import { api } from '../services/api';
 import { socketService } from '../services/socket';
 import { company } from '../data/company';
-import { initialNotifications } from '../data/reviews';
-import { orders as orderSeed } from '../data/orders';
 import type {
   AppNotification,
   CartItem,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { PackageSearchIcon } from 'lucide-react';
 import { ProductCard } from './ProductCard';
 import { EmptyState } from '../ui/EmptyState';

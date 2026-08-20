@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { classNames } from '../../utils/format';
 
 export function ProductGallery({ images, name }: {images: string[];name: string;}) {
