@@ -12,7 +12,7 @@ describe('Backend API Tests', () => {
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(process.env.MONGODB_URI);
     }
-  });
+  }, 30000);
 
   afterAll(async () => {
     // Close the database connection to allow Jest to exit

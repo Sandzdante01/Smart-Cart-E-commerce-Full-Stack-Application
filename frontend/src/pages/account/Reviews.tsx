@@ -5,7 +5,7 @@ import { useStore } from '../../contexts/StoreContext';
 
 export function AccountReviews() {
   const { reviews, user } = useStore();
-  const mine = reviews.filter((r) => r.customerName === `${user?.firstName} ${user?.lastName}`);
+  const mine = reviews.filter((r) => r.customerName === `${user?.firstName} ${user?.lastName}` && r.status === 'Published');
 
   return (
     <div className="space-y-5">

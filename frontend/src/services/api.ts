@@ -121,7 +121,7 @@ export const api = {
       body: JSON.stringify({ status })
     }).then(res => res.json()),
 
-  addReview: (review: Omit<Review, 'id' | 'date' | 'status'>): Promise<Review> =>
+  addReview: (review: Omit<Review, 'id' | 'date' | 'status'> & { status?: 'Published' | 'Pending' }): Promise<Review> =>
     fetch(`${API_BASE_URL}/reviews`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

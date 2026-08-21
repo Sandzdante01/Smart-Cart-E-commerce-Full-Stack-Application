@@ -7,7 +7,7 @@ const router = express.Router();
 // Helper to update product ratings and review count
 const updateProductRating = async (productId) => {
   try {
-    const productReviews = await Review.find({ productId });
+    const productReviews = await Review.find({ productId, status: 'Published' });
     const reviewCount = productReviews.length;
     const avgRating = reviewCount > 0 
       ? Math.round((productReviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount) * 10) / 10
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
       title,
       body,
       date: dateStr,
-      status: 'Published',
+      status: req.body.status || 'Published',
       verified: true
     });
 

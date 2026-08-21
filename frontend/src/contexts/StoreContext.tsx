@@ -76,7 +76,7 @@ interface StoreValue {
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
 
   reviews: Review[];
-  addReview: (review: Omit<Review, 'id' | 'date' | 'status'>) => void;
+  addReview: (review: Omit<Review, 'id' | 'date' | 'status'> & { status?: 'Published' | 'Pending' }) => void;
   deleteReview: (id: string) => void;
 
   notifications: AppNotification[];
@@ -375,7 +375,7 @@ export function StoreProvider({ children }: {children: React.ReactNode;}) {
     }
   }, []);
 
-  const addReview = useCallback(async (review: Omit<Review, 'id' | 'date' | 'status'>) => {
+  const addReview = useCallback(async (review: Omit<Review, 'id' | 'date' | 'status'> & { status?: 'Published' | 'Pending' }) => {
     try {
       const created = await api.addReview(review);
       setReviews((prev) => [created, ...prev]);
