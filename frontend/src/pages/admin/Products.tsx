@@ -11,13 +11,12 @@ import { Rating } from '../../components/ui/Rating';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { TableSkeleton } from '../../components/ui/LoadingSkeleton';
 import { useStore } from '../../contexts/StoreContext';
-import { categories } from '../../data/categories';
 import { brands } from '../../data/products';
 import { formatLKR } from '../../utils/format';
 import type { Product } from '../../types';
 
 export function AdminProducts() {
-  const { products, productsLoading } = useStore();
+  const { products, productsLoading, categories, deleteProduct } = useStore();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All');
@@ -25,12 +24,10 @@ export function AdminProducts() {
   const [stock, setStock] = useState('All');
   const [brand, setBrand] = useState('All');
   const [toDelete, setToDelete] = useState<Product | null>(null);
-  const [deleted, setDeleted] = useState<string[]>([]);
 
   const rows = useMemo(
     () =>
     products.filter((p) => {
-      if (deleted.includes(p.id)) return false;
       if (query && !`${p.name} ${p.brand} ${p.sku}`.toLowerCase().includes(query.toLowerCase()))
       return false;
       if (category !== 'All' && p.category !== category) return false;
@@ -41,7 +38,7 @@ export function AdminProducts() {
       if (stock === 'Healthy' && p.stock <= 10) return false;
       return true;
     }),
-    [products, deleted, query, category, status, brand, stock]
+    [products, query, category, status, brand, stock]
   );
 
   const columns: Array<Column<Product>> = [
@@ -151,7 +148,7 @@ export function AdminProducts() {
         <div>
           <h1 className="text-[28px] font-bold text-ink">Products</h1>
           <p className="mt-1.5 text-[15px] text-ink-soft">
-            {rows.length} of {products.length - deleted.length} products shown.
+            {rows.length} of {products.length} products shown.
           </p>
         </div>
         <Button to="/admin/products/new">
@@ -253,10 +250,14 @@ export function AdminProducts() {
             </Button>
             <Button
             variant="danger"
-            onClick={() => {
+            onClick={async () => {
               if (!toDelete) return;
-              setDeleted((prev) => [...prev, toDelete.id]);
-              toast.success('Product deleted', { description: toDelete.name });
+              try {
+                await deleteProduct(toDelete.id);
+                toast.success('Product deleted', { description: toDelete.name });
+              } catch (err: any) {
+                toast.error(err.message || 'Failed to delete product.');
+              }
               setToDelete(null);
             }}>
             

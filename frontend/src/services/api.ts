@@ -141,5 +141,59 @@ export const api = {
   clearNotifications: (): Promise<AppNotification[]> =>
     fetch(`${API_BASE_URL}/notifications`, {
       method: 'DELETE'
-    }).then(res => res.json())
+    }).then(res => res.json()),
+
+  createProduct: (product: any): Promise<Product> =>
+    fetch(`${API_BASE_URL}/products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(product)
+    }).then(res => {
+      if (!res.ok) throw new Error('Failed to create product');
+      return res.json();
+    }),
+
+  updateProduct: (id: string, updates: any): Promise<Product> =>
+    fetch(`${API_BASE_URL}/products/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updates)
+    }).then(res => {
+      if (!res.ok) throw new Error('Failed to update product');
+      return res.json();
+    }),
+
+  deleteProduct: (id: string): Promise<void> =>
+    fetch(`${API_BASE_URL}/products/${id}`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (!res.ok) throw new Error('Failed to delete product');
+    }),
+
+  createCategory: (category: any): Promise<Category> =>
+    fetch(`${API_BASE_URL}/categories`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(category)
+    }).then(res => {
+      if (!res.ok) throw new Error('Failed to create category');
+      return res.json();
+    }),
+
+  updateCategory: (id: string, updates: any): Promise<Category> =>
+    fetch(`${API_BASE_URL}/categories/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updates)
+    }).then(res => {
+      if (!res.ok) throw new Error('Failed to update category');
+      return res.json();
+    }),
+
+  deleteCategory: (id: string): Promise<void> =>
+    fetch(`${API_BASE_URL}/categories/${id}`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (!res.ok) throw new Error('Failed to delete category');
+    })
 };

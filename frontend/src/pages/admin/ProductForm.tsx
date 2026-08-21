@@ -6,7 +6,6 @@ import { Input } from '../../components/ui/Input';
 import { Select } from '../../components/ui/Select';
 import { Button } from '../../components/ui/Button';
 import { useStore } from '../../contexts/StoreContext';
-import { categories } from '../../data/categories';
 import { productImages } from '../../data/products';
 
 const statusOptions = [
@@ -29,7 +28,7 @@ productImages.accessories];
 
 export function AdminProductForm() {
   const { productId } = useParams<{productId: string;}>();
-  const { products } = useStore();
+  const { products, categories, createProduct, updateProduct } = useStore();
   const navigate = useNavigate();
   const editing = products.find((p) => p.id === productId);
 
@@ -59,7 +58,7 @@ export function AdminProductForm() {
   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
   setValues((prev) => ({ ...prev, [key]: e.target.value }));
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!values.name.trim()) next.name = 'Product name is required.';
@@ -73,11 +72,33 @@ export function AdminProductForm() {
     if (Object.keys(next).length > 0) return;
 
     setSaving(true);
-    setTimeout(() => {
-      setSaving(false);
-      toast.success(editing ? 'Product updated' : 'Product created', { description: values.name });
+    try {
+      const payload = {
+        name: values.name,
+        brand: values.brand,
+        category: values.category,
+        description: values.description,
+        price: Number(values.price),
+        originalPrice: Number(values.originalPrice || values.price),
+        stock: Number(values.stock),
+        sku: values.sku,
+        status: values.status,
+        images
+      };
+
+      if (editing) {
+        await updateProduct(editing.id, payload);
+        toast.success('Product updated', { description: values.name });
+      } else {
+        await createProduct(payload);
+        toast.success('Product created', { description: values.name });
+      }
       navigate('/admin/products');
-    }, 700);
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to save product.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (

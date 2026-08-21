@@ -2,14 +2,13 @@ import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis
 import { BanknoteIcon, PercentIcon, RepeatIcon, ShoppingBagIcon } from 'lucide-react';
 import { StatCard } from '../../components/ui/StatCard';
 import { SalesChart } from '../../components/admin/SalesChart';
-import { categories } from '../../data/categories';
 import { useStore } from '../../contexts/StoreContext';
 import { formatCompactLKR, formatLKR } from '../../utils/format';
 
 const palette = ['#4338ca', '#0ea5e9', '#16a34a', '#d97706', '#6366f1', '#0284c7'];
 
 export function AdminAnalytics() {
-  const { products } = useStore();
+  const { products, categories } = useStore();
 
   const byCategory = categories.map((category) => ({
     name: category.name,

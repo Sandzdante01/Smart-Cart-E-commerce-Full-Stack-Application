@@ -17,7 +17,8 @@ import type {
   OrderStatus,
   Product,
   Review,
-  User } from
+  User,
+  Category } from
 '../types';
 
 interface CartLine extends CartItem {
@@ -38,6 +39,14 @@ interface StoreValue {
   productsError: string | null;
   reloadProducts: () => void;
   getProduct: (id: string) => Product | undefined;
+  createProduct: (draft: any) => Promise<Product>;
+  updateProduct: (id: string, draft: any) => Promise<Product>;
+  deleteProduct: (id: string) => Promise<void>;
+
+  categories: Category[];
+  createCategory: (draft: Omit<Category, 'id' | 'productCount'>) => Promise<Category>;
+  updateCategory: (id: string, draft: Partial<Category>) => Promise<Category>;
+  deleteCategory: (id: string) => Promise<void>;
 
   user: User | null;
   login: (email: string, password: string) => Promise<User>;
@@ -93,13 +102,31 @@ export function StoreProvider({ children }: {children: React.ReactNode;}) {
   const [productsError, setProductsError] = useState<string | null>(null);
   const [reloadToken, setReloadToken] = useState(0);
 
-  const [user, setUser] = useState<User | null>(null);
-  const [cart, setCart] = useState<CartItem[]>(DEMO_CART);
-  const [wishlist, setWishlist] = useState<string[]>(DEMO_WISHLIST);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [user, setUser] = useState<User | null>(() => {
+    const saved = localStorage.getItem('sc_user');
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    const saved = localStorage.getItem('sc_cart');
+    return saved ? JSON.parse(saved) : DEMO_CART;
+  });
+  const [wishlist, setWishlist] = useState<string[]>(() => {
+    const saved = localStorage.getItem('sc_wishlist');
+    return saved ? JSON.parse(saved) : DEMO_WISHLIST;
+  });
   const [orders, setOrders] = useState<Order[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [recentlyUpdatedStock, setRecentlyUpdatedStock] = useState<string[]>([]);
+
+  useEffect(() => {
+    localStorage.setItem('sc_cart', JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem('sc_wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
 
   useEffect(() => {
     let active = true;
@@ -120,6 +147,10 @@ export function StoreProvider({ children }: {children: React.ReactNode;}) {
     return () => {
       active = false;
     };
+  }, [reloadToken]);
+
+  useEffect(() => {
+    api.getCategories().then(setCategories).catch(console.error);
   }, [reloadToken]);
 
   useEffect(() => {
@@ -283,6 +314,7 @@ export function StoreProvider({ children }: {children: React.ReactNode;}) {
   const login = useCallback(async (email: string, password: string) => {
     const loggedIn = await api.login(email, password);
     setUser(loggedIn);
+    localStorage.setItem('sc_user', JSON.stringify(loggedIn));
     toast.success(`Welcome back, ${loggedIn.firstName}!`);
     return loggedIn;
   }, []);
@@ -291,6 +323,7 @@ export function StoreProvider({ children }: {children: React.ReactNode;}) {
     async (payload: {firstName: string;lastName: string;email: string;phone: string;}) => {
       const created = await api.register(payload);
       setUser(created);
+      localStorage.setItem('sc_user', JSON.stringify(created));
       toast.success('Account created', { description: `Welcome to SmartCart, ${created.firstName}.` });
       return created;
     },
@@ -299,6 +332,7 @@ export function StoreProvider({ children }: {children: React.ReactNode;}) {
 
   const logout = useCallback(() => {
     setUser(null);
+    localStorage.removeItem('sc_user');
     toast('Signed out', { description: 'You have been logged out of SmartCart.' });
   }, []);
 
@@ -371,12 +405,59 @@ export function StoreProvider({ children }: {children: React.ReactNode;}) {
     api.clearNotifications().then(setNotifications).catch(console.error);
   }, []);
 
+  const createProduct = useCallback(async (draft: any) => {
+    const created = await api.createProduct(draft);
+    setProducts((prev) => [created, ...prev]);
+    setReloadToken((t) => t + 1);
+    return created;
+  }, []);
+
+  const updateProduct = useCallback(async (id: string, draft: any) => {
+    const updated = await api.updateProduct(id, draft);
+    setProducts((prev) => prev.map((p) => p.id === id ? updated : p));
+    setReloadToken((t) => t + 1);
+    return updated;
+  }, []);
+
+  const deleteProduct = useCallback(async (id: string) => {
+    await api.deleteProduct(id);
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+    setReloadToken((t) => t + 1);
+  }, []);
+
+  const createCategory = useCallback(async (draft: any) => {
+    const created = await api.createCategory(draft);
+    setCategories((prev) => [created, ...prev]);
+    setReloadToken((t) => t + 1);
+    return created;
+  }, []);
+
+  const updateCategory = useCallback(async (id: string, draft: any) => {
+    const updated = await api.updateCategory(id, draft);
+    setCategories((prev) => prev.map((c) => c.id === id ? updated : c));
+    setReloadToken((t) => t + 1);
+    return updated;
+  }, []);
+
+  const deleteCategory = useCallback(async (id: string) => {
+    await api.deleteCategory(id);
+    setCategories((prev) => prev.filter((c) => c.id !== id));
+    setReloadToken((t) => t + 1);
+  }, []);
+
   const value: StoreValue = {
     products,
     productsLoading,
     productsError,
     reloadProducts: () => setReloadToken((t) => t + 1),
     getProduct,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    categories,
+    createCategory,
+    updateCategory,
+    deleteCategory,
     user,
     login,
     register,

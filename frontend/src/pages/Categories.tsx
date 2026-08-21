@@ -1,9 +1,26 @@
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from 'lucide-react';
 import { PageHeader } from '../components/ui/PageHeader';
-import { categories } from '../data/categories';
+import { useStore } from '../contexts/StoreContext';
+import type { Category } from '../types';
 
 export function Categories() {
+  const { categories } = useStore();
+
+  if (categories.length === 0) {
+    return (
+      <>
+        <PageHeader
+          title="Categories"
+          subtitle="Six focused collections covering everything we stock — from ultrabooks to everyday accessories."
+          crumbs={[{ label: 'Categories' }]} />
+        <div className="mx-auto max-w-shell px-6 py-20 text-center text-slate-400">
+          Loading categories...
+        </div>
+      </>
+    );
+  }
+
   const [lead, ...rest] = categories;
 
   return (
@@ -56,7 +73,7 @@ export function Categories() {
 
 }
 
-function CategoryTile({ category }: {category: (typeof categories)[number];}) {
+function CategoryTile({ category }: {category: Category;}) {
   return (
     <Link
       to={`/shop?category=${encodeURIComponent(category.name)}`}

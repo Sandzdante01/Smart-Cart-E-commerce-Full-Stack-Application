@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
-import { categories } from '../../data/categories';
+import { useStore } from '../../contexts/StoreContext';
 
 export function CategorySection() {
+  const { categories } = useStore();
+
   return (
     <section className="mx-auto max-w-shell px-6 py-16">
       <SectionHeading

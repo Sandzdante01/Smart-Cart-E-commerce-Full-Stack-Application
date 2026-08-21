@@ -1,6 +1,6 @@
 import React from 'react';
 import { StarIcon } from 'lucide-react';
-import { categories } from '../../data/categories';
+import { useStore } from '../../contexts/StoreContext';
 import { brands } from '../../data/products';
 import { formatLKR } from '../../utils/format';
 import { Button } from '../ui/Button';
@@ -37,6 +37,7 @@ function Group({ title, children }: {title: string;children: React.ReactNode;}) 
 }
 
 export function FilterPanel({ filters, onChange, onReset }: FilterPanelProps) {
+  const { categories } = useStore();
   const set = (patch: Partial<Filters>) => onChange({ ...filters, ...patch });
 
   return (
