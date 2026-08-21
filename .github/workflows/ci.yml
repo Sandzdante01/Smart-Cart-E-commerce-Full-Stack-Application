@@ -16,6 +16,10 @@ jobs:
     name: Backend CI
     runs-on: ubuntu-latest
 
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      NODE_ENV: test
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
